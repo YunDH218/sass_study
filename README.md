@@ -424,4 +424,65 @@ Sass는 전역에서 사용할 수 있는 내장 함수를 제공한다.
 
 두 가지 색상을 입력 받아 두 색상을 혼합(mix)한 색상을 반환한다.
 
-### `darken($color, n%)`
+
+# 색상 내장 함수
+
+Sass는 전역에서 사용할 수 있는 내장 함수를 제공한다. 
+
+### `mix($color1, $color2)`
+
+두 가지 색상을 입력 받아 두 색상을 혼합(mix)한 색상을 반환한다.
+
+### `lighten($color, n%)`, `darken($color, n%)`
+
+`$color`를 `n%` 밝게(lighten) 또는 어둡게(darken)한 색상을 반환한다.
+
+### `saturate($color, n%)`, `desaturate($color, n%)`
+
+`$color`의 채도를 `n%`만큼 높이거나(sturate), 낮춘(desaturate) 색상을 반환한다.
+
+### `grayscale($color)`
+
+`$color`를 회색조로 바꾸어 반환한다.
+
+### `invert($color)`
+
+`$color`를 반전시킨 색상을 반환한다.
+
+### `rgba($color, opacity)`
+
+`$color`에 `opacity` 만큼의 투명도를 적용하여 반환한다. CSS에서 사용하는 `rgba(red, green, blue, opacity)`보다 인수가 적어 쓰기에 편리하다.
+
+<br>
+
+#  가져오기
+
+`@import`를 통해 `url()`없이, 확장자 없이, 다른 scss파일을 연결할 수 있다.
+
+index.html
+```html
+<div class="container">
+	<h1>Hello SCSS!<h1>
+</div>
+```
+
+main.scss
+```scss
+@import "./sub";
+//만일 가져오려는 파일이 두 개 이상이면 "./sub", "./sub2", ... 로 가져올 수 있다.
+
+$color: royalblue;
+
+.container{
+	h1 { color: $color }
+}
+```
+
+sub.scss
+```scss
+.container{ background-color: orange; }
+```
+
+출력형태
+<div style="background-color: orange"><p style="color:royalblue;font-size:32px;font-weight:bold;">Hello CSS!</p></div>
+
