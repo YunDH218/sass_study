@@ -374,7 +374,7 @@ Sass에서 반복문은 아래와 같이 사용한다. 보간은 `#{ expr }`과 
 
 main.scss
 ```scss
-@for $i from 1 through 10 {
+@for $i from 1 through 11 {
   .box:nth-child(#{$i}) { width: 100px * $i; }
 }
 ```
