@@ -484,5 +484,134 @@ sub.scss
 ```
 
 출력형태
-<div style="background-color: orange"><p style="color:royalblue;font-size:32px;font-weight:bold;">Hello CSS!</p></div>
+<div style="background-color: orange"><p style="color:royalblue;font-size:32px;font-weight:bold;">Hello SCSS!</p></div>
 
+<br>
+
+# 데이터 형태
+
+Sass에서는 숫자(number), 문자열(string), 색상(color), 불린(boolean), 널(null), 배열(list), 맵(map)의 datatype을 제공한다.
+
+```scss
+$number: 1; // .5. 100px, 1em
+$string: bold;  // relative, "../images/a.png"
+$color: red;  // blue, #FFFF00, rgba(0,0,0,.1)
+$boolean: true; //false
+$null: null;
+$list: orange, royalblue, yellow;
+$map: (
+  o: orange,
+  r: royalblue,
+  y: yellow
+);
+
+.box {
+  width: 100px;
+  color: red;
+  position: relative;
+}
+```
+
+<br>
+
+# 반복문 - `@each`
+
+map과 list에 대하여 @each를 사용한 반복 작업을 사용할 수 있다.
+
+main.scss
+```scss
+$list: orange, royalblue, yellow;
+$map: (
+  o: orange,
+  r: royalblue,
+  y: yellow
+);
+/* list */
+@each $c in $list {
+  .box {
+    color: $c;
+  }
+}
+/* map */
+@each $k, $v in $map {
+  .box-#{$k} {
+    color: $v;
+  }
+}
+```
+
+main.css(compiled)
+```css
+/* list */
+.box {
+  color: orange;
+}
+.box {
+  color: royalblue;
+}
+.box {
+  color: yellow;
+}
+/* map */
+.box-o {
+  color: orange;
+}
+.box-r {
+  color: royalblue;
+}
+.box-y {
+  color: yellow;
+}
+```
+
+<br>
+
+# 재활용 - `@content`
+
+`@mixin`을 사용하여 재활용 할 때 `@content`를 사용하면 재활용한 후에 중괄호를 이용하여 추가적인 내용을 적으면 재활용하기로 정의한 내용에 중괄호 안의 속성을 추가로 적용할 수 있다.
+
+main.scss
+```scss
+@mixin left-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    @content;
+}
+.container {
+    width: 100px;
+    height: 100px;
+    @include left-top;
+}
+.box {
+    width: 200px;
+    height: 300px;
+    @include left-top {
+        bottom: 0;
+        right: 0;
+        margin: auto;
+    }
+}
+```
+
+main.css(compiled)
+```css
+.container {
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.box {
+  width: 200px;
+  height: 300px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto;
+}
+```
